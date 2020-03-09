@@ -27,7 +27,7 @@
 &adc1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_adc1>;
-	adc-ch-list = <4>;
+	adc-ch-list = <4 5>;
 	status = "okay";
 };
 
@@ -62,7 +62,7 @@
 
 /* MCA IO0 connected to Grove ADC connector */
 &mca_adc {
-	digi,adc-ch-list = <0>;
+	digi,adc-ch-list = <0 4>;
 	digi,adc-vref = <3000000>;
 };
 
@@ -110,6 +110,8 @@
 			fsl,pins = <
 				/* GPIO1_4/ADC1_IN4 (pin 7 of the expansion header) */
 				MX6UL_PAD_GPIO1_IO04__GPIO1_IO04        0xb0
+				/* GPIO1_5/ADC1_IN5 (pin 29 of the expansion header) */
+				MX6UL_PAD_GPIO1_IO05__GPIO1_IO05        0xb0
 			>;
 		};
 
