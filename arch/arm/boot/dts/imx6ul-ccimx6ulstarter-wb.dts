@@ -76,9 +76,9 @@
 };
 
 /* CAN1 (Raspberry PI Expansion header) */
-&can1 {
+/* &can1 {
 	status = "okay";
-};
+}; */
 
 /* I2C2 (Raspberry PI Expansion header and Grove connector) */
 &i2c2 {
@@ -134,9 +134,9 @@
 };
 
 /* USDHC2 (microSD) */
-&usdhc2 {
+/* &usdhc2 {
 	status = "okay";
-};
+}; */
 
 /* Pin mux configuration */
 &iomuxc {
