@@ -55,12 +55,12 @@
 };
 
 /* CAN1 (Raspberry PI Expansion header) */
-&can1 {
+/* &can1 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_flexcan1>;
 	xceiver-supply = <&ext_3v3>;
 	status = "disabled";
-};
+}; */
 
 &i2c2 {
 	pinctrl-names = "default", "gpio";
@@ -134,13 +134,13 @@
 };
 
 /* USDHC2 (microSD) */
-&usdhc2 {
+/* &usdhc2 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usdhc2>;
 	broken-cd;      /* no carrier detect line (use polling) */
 	no-1-8-v;
 	status = "disabled";
-};
+}; */
 
 &iomuxc {
 	pinctrl-names = "default";
