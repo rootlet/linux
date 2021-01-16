@@ -17,10 +17,18 @@
 
 /* ECSPI3 (Raspberry PI Expansion header) */
 &ecspi3 {
-	num-cs = <1>;
-	cs-gpios = <&gpio1 20 GPIO_ACTIVE_LOW>;
+	num-cs = <3>;
+	cs-gpios = <&gpio1 20 GPIO_ACTIVE_LOW>, <&gpio3 06 GPIO_ACTIVE_LOW>, <&gpio4 18 GPIO_ACTIVE_LOW>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_ecspi3_master>;
+	status = "disabled";
+};
+
+&ecspi2 {
+	num-cs = <1>;
+	cs-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_ecspi2_master>;
 	status = "disabled";
 };
 
@@ -44,14 +52,6 @@
 			reg = <0>;
 		};
 	};
-};
-
-/* CAN1 (Raspberry PI Expansion header) */
-&can1 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_flexcan1>;
-	xceiver-supply = <&ext_3v3>;
-	status = "disabled";
 };
 
 &i2c2 {
@@ -101,6 +101,8 @@
 &uart4 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart4>;
+	uart-has-rtscts;
+	linux,rs485-enabled-at-boot-time;
 	status = "disabled";
 };
 
@@ -125,15 +127,6 @@
 	status = "disabled";
 };
 
-/* USDHC2 (microSD) */
-&usdhc2 {
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_usdhc2>;
-	broken-cd;      /* no carrier detect line (use polling) */
-	no-1-8-v;
-	status = "disabled";
-};
-
 &iomuxc {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_hog>;
@@ -145,6 +138,8 @@
 				MX6UL_PAD_UART2_CTS_B__ECSPI3_MOSI	0x10b0
 				MX6UL_PAD_UART2_RTS_B__ECSPI3_MISO	0x10b0
 				MX6UL_PAD_UART2_TX_DATA__GPIO1_IO20	0x10b0 /* Chip Select */
+				MX6UL_PAD_LCD_DATA01__GPIO3_IO06	0x10b0 /* Chip Select */
+				MX6UL_PAD_CSI_PIXCLK__GPIO4_IO18	0x10b0 /* Chip Select */
 			>;
 		};
 
@@ -154,6 +149,24 @@
 				MX6UL_PAD_UART2_CTS_B__ECSPI3_MOSI	0x10b0
 				MX6UL_PAD_UART2_RTS_B__ECSPI3_MISO	0x10b0
 				MX6UL_PAD_UART2_TX_DATA__ECSPI3_SS0	0x10b0 /* Chip Select */
+			>;
+		};
+
+		pinctrl_ecspi2_master: ecspi2grp1 {
+			fsl,pins = <
+				MX6UL_PAD_CSI_DATA00__ECSPI2_SCLK	0x10b0
+				MX6UL_PAD_CSI_DATA02__ECSPI2_MOSI	0x10b0
+				MX6UL_PAD_CSI_DATA03__ECSPI2_MISO	0x10b0
+				MX6UL_PAD_CSI_DATA01__GPIO4_IO22	0x10b0 /* Chip Select */
+			>;
+		};
+
+		pinctrl_ecspi2_slave: ecspi2grp2 {
+			fsl,pins = <
+				MX6UL_PAD_CSI_DATA00__ECSPI2_SCLK	0x10b0
+				MX6UL_PAD_CSI_DATA02__ECSPI2_MOSI	0x10b0
+				MX6UL_PAD_CSI_DATA03__ECSPI2_MISO	0x10b0
+				MX6UL_PAD_CSI_DATA01__ECSPI2_SS0	0x10b0 /* Chip Select */
 			>;
 		};
 
@@ -178,13 +191,6 @@
 				MX6UL_PAD_LCD_HSYNC__GPIO3_IO02		0x1b0b0
 				/* ENET1_INT */
 				MX6UL_PAD_LCD_DATA04__GPIO3_IO09	0x1b0b0
-			>;
-		};
-
-		pinctrl_flexcan1: flexcan1grp{
-			fsl,pins = <
-				MX6UL_PAD_LCD_DATA08__FLEXCAN1_TX	0x1b020
-				MX6UL_PAD_LCD_DATA09__FLEXCAN1_RX	0x1b020
 			>;
 		};
 
@@ -219,17 +225,6 @@
 			fsl,pins = <
 				MX6UL_PAD_UART5_TX_DATA__UART5_DCE_TX	0x1b0b1
 				MX6UL_PAD_UART5_RX_DATA__UART5_DCE_RX	0x1b0b1
-			>;
-		};
-
-		pinctrl_usdhc2: usdhc2grp {
-			fsl,pins = <
-				MX6UL_PAD_CSI_HSYNC__USDHC2_CMD		0x17059
-				MX6UL_PAD_CSI_VSYNC__USDHC2_CLK		0x10071
-				MX6UL_PAD_CSI_DATA00__USDHC2_DATA0	0x17059
-				MX6UL_PAD_CSI_DATA01__USDHC2_DATA1	0x17059
-				MX6UL_PAD_CSI_DATA02__USDHC2_DATA2	0x17059
-				MX6UL_PAD_CSI_DATA03__USDHC2_DATA3	0x17059
 			>;
 		};
 
