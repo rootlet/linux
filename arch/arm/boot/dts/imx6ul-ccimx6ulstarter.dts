@@ -119,7 +119,7 @@
 
 /* Pin mux configuration */
 &iomuxc {
-	pinctrl-0 =  <&pinctrl_expansion>;
+	pinctrl-0 = <&pinctrl_hog>, <&pinctrl_expansion>;
 
 	imx6ul-ccimx6ul {
 		pinctrl_adc1: adc1grp {
@@ -190,10 +190,6 @@
 				MX6UL_PAD_CSI_VSYNC__GPIO4_IO19		0x1b0b0
 				/* IRQ SPI3 pin17 */
 				MX6UL_PAD_CSI_HSYNC__GPIO4_IO20		0x1b0b0
-				/* Замок розетки бытовой(actuator) (OUT3) pin62 */
-				MX6UL_PAD_LCD_DATA06__GPIO3_IO11	0x1b0b0
-				/* Digital (LED) DATA pin67 */
-				MX6UL_PAD_LCD_VSYNC__GPIO3_IO03		0x1b0b0
 			>;
 		};
 	};
