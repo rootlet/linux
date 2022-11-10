@@ -89,7 +89,7 @@
 	status = "disabled";
 };
 
-* UART2 */
+/* UART2 */
 &uart2 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_uart2>;
