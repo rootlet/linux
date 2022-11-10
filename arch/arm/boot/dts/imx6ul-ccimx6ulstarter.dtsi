@@ -16,14 +16,6 @@
 };
 
 /* ECSPI3 (Raspberry PI Expansion header) */
-&ecspi3 {
-	num-cs = <1>;
-	cs-gpios = <&gpio1 20 GPIO_ACTIVE_LOW>;
-	pinctrl-names = "default";
-	pinctrl-0 = <&pinctrl_ecspi3_master>;
-	status = "disabled";
-};
-
 &ecspi2 {
 	num-cs = <1>;
 	cs-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
@@ -94,6 +86,13 @@
 };
 
 &pwm8 {
+	status = "disabled";
+};
+
+* UART2 */
+&uart2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart2>;
 	status = "disabled";
 };
 
